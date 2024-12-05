@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 
-class Personaje
+class Carro
 {
 public:
-    Personaje(sf::Vector2f position, sf::Color color)
+    Carro(sf::Vector2f position, sf::Color color)
     {
         shape.setSize(sf::Vector2f(50, 50));
         shape.setPosition(position); // Posición inicial cuadro
@@ -59,7 +59,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
 
-    Personaje pika(sf::Vector2f(400, 300), sf::Color::Red);
+    Carro pika(sf::Vector2f(400, 300), sf::Color::Red);
 
     while (window.isOpen())
     {

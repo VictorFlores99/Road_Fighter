@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-class Personaje {
+class Carro {
 public:
-    Personaje(sf::Vector2f position, sf::Color color) {
+    Carro(sf::Vector2f position, sf::Color color) {
         shape.setSize(sf::Vector2f(50, 50));
         shape.setPosition(position);
         shape.setFillColor(color);
@@ -25,7 +25,7 @@ double velocidad = 0.1;
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DinoChrome");
 
-    Personaje character(sf::Vector2f(400, 300), sf::Color::Red);
+    Carro character(sf::Vector2f(400, 300), sf::Color::Red);
 
     while (window.isOpen()) {
         sf::Event event;
