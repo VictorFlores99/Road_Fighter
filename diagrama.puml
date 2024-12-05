@@ -1,0 +1,90 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+' Clases principales
+class Personaje {
+    +Personaje(string textureFile, sf::Vector2f position)
+    +void move(float offsetX, float offsetY)
+    +void setPosition(float x, float y)
+    +void draw(sf::RenderWindow &window)
+    +const sf::Sprite &getSprite()
+    -sf::Texture texture
+    -sf::Sprite sprite
+}
+
+class PersonajeAuto {
+    +void update(float elapsedTime, float startY, float duration)
+}
+
+class Obstaculo {
+    +Obstaculo(string textureFile, sf::Vector2f position)
+    +void mover(float velocidadY)
+    +void draw(sf::RenderWindow &window)
+    +const sf::Sprite &getSprite()
+    -sf::Texture texture
+    -sf::Sprite sprite
+}
+
+class Control {
+    +Control(float velocidad)
+    +void manejarEntrada(Personaje &jugador)
+    -float velocidad
+}
+
+class Vidas {
+    +Vidas(int vidasIniciales)
+    +bool restarVida()
+    +int obtenerVidas()
+    -int vidas
+}
+
+class Contador {
+    +Contador(float tiempoLimite)
+    +float tiempoRestante()
+    +bool tiempoAgotado()
+    +void reiniciar()
+    -float tiempoLimite
+    -sf::Clock reloj
+}
+
+class Texto {
+    +Texto(string fontFile, string contenido, unsigned int tamanio, sf::Color color, sf::Vector2f posicion)
+    +void actualizarContenido(string contenido)
+    +void draw(sf::RenderWindow &window)
+    -sf::Font font
+    -sf::Text text
+}
+
+class Musica {
+    +Musica(string filePath)
+    +void play()
+    -sf::Music music
+}
+
+' Relaciones
+Personaje <|-- PersonajeAuto : es
+Personaje "1" *-- "1" sf::Texture : tiene
+Personaje "1" *-- "1" sf::Sprite : tiene
+
+Obstaculo "1" *-- "1" sf::Texture : tiene
+Obstaculo "1" *-- "1" sf::Sprite : tiene
+
+Control "1" *-- "1" Personaje : usa
+
+Contador "1" *-- "1" sf::Clock : tiene
+
+Texto "1" *-- "1" sf::Font : tiene
+Texto "1" *-- "1" sf::Text : tiene
+
+Musica "1" *-- "1" sf::Music : tiene
+
+' Relaciones en el contexto del juego
+Personaje "1" <.. "N" Obstaculo : usa
+Personaje "1" <.. "1" Control : usa
+Personaje "1" <.. "1" Vidas : usa
+Personaje "1" <.. "1" Texto : usa
+Personaje "1" <.. "1" Contador : usa
+
+Texto "1" <.. "1" Vidas : usa
+
+@enduml
