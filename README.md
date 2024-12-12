@@ -13,11 +13,11 @@ Road Fighter es un prototipo del juego de carreras desarrollado producido por Ko
 
 * El juego cuenta con un personaje que se puede controlar utilizando las teclas de flecha.  
 
-![Imagen del personaje](assets/images/ImagesJuego/personaje.png)
+![Imagen del personaje](assets/images/personaje.png)
 
 * Los obstáculos se generan en la carretera de manera aleatoria y se mueven hacia adelante.  
 
-![Imagen del auto obstáculo](assets/images/ImagesJuego/obstaculo.png)
+![Imagen del auto obstáculo](assets/images/obstaculo.png)
 
 * El jugador debe evitar chocar con los obstáculos para sobrevivir.
 * El juego cuenta con un temporizador que muestra el tiempo restante para completar el nivel.
