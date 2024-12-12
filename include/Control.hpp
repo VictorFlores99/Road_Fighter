@@ -1,43 +1,33 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include "Personaje.hpp" 
 
 class Control
 {
-private:
-    sf::Keyboard::Key mover_arriba;
-    sf::Keyboard::Key mover_abajo;
-    sf::Keyboard::Key mover_izquierda;
-    sf::Keyboard::Key mover_derecha;
-
 public:
-    Control(){}
-    Control(
-        sf::Keyboard::Key arriba,
-        sf::Keyboard::Key abajo, 
-        sf::Keyboard::Key izquierda, 
-        sf::Keyboard::Key derecha)
-    {
-        this->mover_arriba = arriba;
-        this->mover_abajo = abajo;
-        this->mover_izquierda = izquierda;
-        this->mover_derecha = derecha;
-    } 
-    ~Control() {}
+    Control(float velocidad) : velocidad(velocidad) {}
 
-    sf::Keyboard::Key BotonArriba()
+    void manejarEntrada(Personaje &jugador)
     {
-        return this->mover_arriba;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            jugador.move(-velocidad, 0);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            jugador.move(velocidad, 0);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            jugador.move(0, -velocidad);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            jugador.move(0, velocidad);
+        }
     }
-    sf::Keyboard::Key BotonAbajo()
-    {
-        return this->mover_abajo;
-    }
-    sf::Keyboard::Key BotonIzquierda()
-    {
-        return this->mover_izquierda;
-    }
-    sf::Keyboard::Key BotonDerecha()
-    {
-        return this->mover_derecha;
-    }
+
+private:
+    float velocidad;
 };

@@ -1,44 +1,42 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <iostream>
 
-class Obstaculo {
+const float MIN_X = 240.0f; // Límite inferior de la posición X
+const float MAX_X = 440.0f; // Límite superior de la posición X
+const float VELOCIDAD_OBSTACULO_Y = 0.2f; // Velocidad de los obstáculos
+
+class Obstaculo
+{
+public:
+    Obstaculo(const std::string &textureFile, sf::Vector2f position)
+    {
+        if (!texture.loadFromFile(textureFile))
+        {
+            std::cerr << "Error al cargar la textura del obstáculo." << std::endl;
+        }
+        sprite.setTexture(texture);
+        sprite.setPosition(position);
+    }
+
+    void mover(float velocidadY)
+    {
+        sprite.move(0, velocidadY); // Solo se mueve hacia abajo
+    }
+
+    void draw(sf::RenderWindow &window) const
+    {
+        window.draw(sprite);
+    }
+
+    const sf::Sprite &getSprite() const
+    {
+        return sprite;
+    }
+
 private:
     sf::Texture texture;
     sf::Sprite sprite;
-    float velocidad; // Velocidad de movimiento del obstáculo
-
-public:
-    Obstaculo(const std::string& rutaImagen, sf::Vector2f posicionInicial, float velocidadInicial)
-        : velocidad(velocidadInicial)
-    {
-        if (!texture.loadFromFile(rutaImagen)) {
-            std::cerr << "Error al cargar la textura del obstáculo." << std::endl;
-            throw "Error al cargar imagen";
-        }
-        sprite.setTexture(texture);
-        sprite.setPosition(posicionInicial);
-    }
-
-    ~Obstaculo() {}
-
-    void mover() {
-        // Mueve el obstáculo hacia abajo
-        sprite.move(0, velocidad);
-
-        // Si sale de la ventana, vuelve a aparecer arriba en una posición aleatoria
-        if (sprite.getPosition().y > 800) { // 800 es la altura de la ventana
-            float nuevaX = rand() % 800; // Posición X aleatoria
-            sprite.setPosition(nuevaX, -sprite.getGlobalBounds().height);
-        }
-    }
-
-    bool colisionaCon(const sf::Sprite& personaje) const {
-        // Detecta colisión con otro sprite
-        return sprite.getGlobalBounds().intersects(personaje.getGlobalBounds());
-    }
-
-    void draw(sf::RenderWindow& window) {
-        window.draw(sprite);
-    }
 };

@@ -1,7 +1,5 @@
-@startuml
-skinparam classAttributeIconSize 0
+@startuml Diagrama
 
-' Clases principales
 class Personaje {
     +Personaje(string textureFile, sf::Vector2f position)
     +void move(float offsetX, float offsetY)
